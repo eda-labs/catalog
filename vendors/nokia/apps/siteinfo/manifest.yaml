@@ -21,6 +21,7 @@ spec:
   supportedCoreVersions:
     - "v0.0.0-0"
     - "v24.8.2"
+    - "v1.0.1"
   appInfo:
     readme: README.md
     documentation: DOCUMENTATION.md
