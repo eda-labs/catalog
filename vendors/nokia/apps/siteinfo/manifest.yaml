@@ -12,7 +12,7 @@ spec:
     This includes managing DNS, host and domain names, banners and MOTD messages, and other site-specific information.
   image: ghcr.io/eda-labs/siteinfo:v1.0.0-rc1
   author: Nokia
-  gitReference: 1da44402c90fbeba1161ccb8ea3350ef0353843d
+  gitReference: main
   gitPathPrefix: /
   supportedEndpoints:
     - "srl:0.0.0"
