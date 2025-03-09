@@ -1,0 +1,57 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: myapp
+spec:
+  appInfo:
+    categories:
+      - networking
+    license: LICENSE
+    readme: README.md
+    ociSpecVersion: v1.0.0
+  author: Community
+  components:
+    - crd:
+        api:
+          expose: readWrite
+        path: myapp/crds/myapp.eda.local_banners.yaml
+        schema: myapp/openapiv3/eda_oas_myapp.eda.local_banners.json
+        ui:
+          category: Banner
+          name: Banner
+    - script:
+        path: myapp/intents/banner/banner_intent.py
+        trigger:
+          kind: Banner
+        type: config
+    - script:
+        path: myapp/intents/bannerstate/bannerstate_intent.py
+        trigger:
+          kind: BannerState
+        type: state
+    - crd:
+        path: myapp/crds/myapp.eda.local_bannerstates.yaml
+        schema: myapp/openapiv3/eda_oas_myapp.eda.local_bannerstates.json
+  dependencies:
+    - file:
+        path: myapp/api/v1alpha1/pysrc/
+    - file:
+        path: common/
+    - file:
+        path: utils/
+    - file:
+        path: myapp/intents/
+  description: Sample description
+  group: myapp.eda.local
+  image: ghcr.io/hellt/eda-test-app:v0.1.0
+  supportedCoreVersions:
+    - v2.0.0-0
+  supportedEndpoints:
+    - srl:0.0.0
+    - srl:24.10.*
+    - srl:25.*
+    - sros:24.10.*
+    - sros:25.*
+  title: Sample
+  version: v1alpha1
+
