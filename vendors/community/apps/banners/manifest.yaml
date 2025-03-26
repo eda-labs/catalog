@@ -21,6 +21,7 @@ spec:
   group: eda.local
   image: ghcr.io/eda-labs/banners:v1.0.0-rc1
   supportedEndpoints:
+    - "srl:0.0.0"
     - "srl:24.10.3"
     - "srl:24.*" # any release in a major
     - "srl:25.*"
