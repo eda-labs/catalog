@@ -50,10 +50,10 @@ spec:
           category: Proton
           name: Proton Uplinks
         names:
-          kind: ProtonUplink
-          listKind: ProtonUplinkList
           plural: protonuplinks
           singular: protonuplink
+          kind: ProtonUplink
+          listKind: ProtonUplinkList
     - script:
         path: proton/intents/protonuplink/config_intent.py
         trigger:
@@ -65,10 +65,10 @@ spec:
         path: proton/crds/proton.eda.local_protonuplinkstates.yaml
         schema: proton/openapiv3/eda_oas_proton.eda.local_protonuplinkstates.json
         names:
-          plural: protonuplinkstates
-          singular: protonuplinkstate
           kind: ProtonUplinkState
           listKind: ProtonUplinkStateList
+          plural: protonuplinkstates
+          singular: protonuplinkstate
     - script:
         path: proton/intents/protonuplinkstate/state_intent.py
         trigger:
