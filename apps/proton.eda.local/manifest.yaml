@@ -1,0 +1,76 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: proton
+spec:
+  appInfo:
+    categories:
+      - networking
+      #documentation: proton/docs
+    ociSpecVersion: v1.0.0
+  author: nokia
+  dependencies:
+    - file:
+        path: utils
+    - file:
+        path: common
+    - file:
+        path: proton/deps
+    - file:
+        path: proton/intents
+    - file:
+        path: proton/api/v1alpha1/pysrc
+  description: Custom networking app for Proton
+  group: proton.eda.local
+  image: ghcr.io/eda-labs/proton:v0.0.2
+  supportedCoreVersions:
+    - v3.0.0-0
+  title: Proton
+  version: v1alpha1
+  requirements:
+    - appName: services
+      vendor: nokia
+      version: v4.*
+    - appName: fabrics
+      vendor: nokia
+      version: v4.*
+    - appName: interfaces
+      vendor: nokia
+      version: v4.*
+    - appName: protocols
+      vendor: nokia
+      version: v4.*
+  components:
+    - crd:
+        api:
+          expose: readWrite
+        path: proton/crds/proton.eda.local_protonuplinks.yaml
+        schema: proton/openapiv3/eda_oas_proton.eda.local_protonuplinks.json
+        ui:
+          category: Proton
+          name: Proton Uplinks
+        names:
+          kind: ProtonUplink
+          listKind: ProtonUplinkList
+          plural: protonuplinks
+          singular: protonuplink
+    - script:
+        path: proton/intents/protonuplink/config_intent.py
+        trigger:
+          kind: ProtonUplink
+        type: config
+    - crd:
+        api:
+          expose: none
+        path: proton/crds/proton.eda.local_protonuplinkstates.yaml
+        schema: proton/openapiv3/eda_oas_proton.eda.local_protonuplinkstates.json
+        names:
+          plural: protonuplinkstates
+          singular: protonuplinkstate
+          kind: ProtonUplinkState
+          listKind: ProtonUplinkStateList
+    - script:
+        path: proton/intents/protonuplinkstate/state_intent.py
+        trigger:
+          kind: ProtonUplinkState
+        type: state
