@@ -22,7 +22,7 @@ spec:
         path: proton/api/v1alpha1/pysrc
   description: Custom networking app for Proton
   group: proton.eda.local
-  image: ghcr.io/eda-labs/proton:v0.0.2
+  image: ghcr.io/eda-labs/proton:v0.1.0
   supportedCoreVersions:
     - v3.0.0-0
   title: Proton
@@ -73,4 +73,37 @@ spec:
         path: proton/intents/protonuplinkstate/state_intent.py
         trigger:
           kind: ProtonUplinkState
+        type: state
+    - crd:
+        api:
+          expose: readWrite
+        path: proton/crds/proton.eda.local_protonnets.yaml
+        schema: proton/openapiv3/eda_oas_proton.eda.local_protonnets.json
+        ui:
+          category: Proton
+          name: Proton Nets
+        names:
+          plural: protonnets
+          singular: protonnet
+          kind: ProtonNet
+          listKind: ProtonNetList
+    - script:
+        path: proton/intents/protonnet/config_intent.py
+        trigger:
+          kind: ProtonNet
+        type: config
+    - crd:
+        api:
+          expose: none
+        path: proton/crds/proton.eda.local_protonnetstates.yaml
+        schema: proton/openapiv3/eda_oas_proton.eda.local_protonnetstates.json
+        names:
+          listKind: ProtonNetStateList
+          plural: protonnetstates
+          singular: protonnetstate
+          kind: ProtonNetState
+    - script:
+        path: proton/intents/protonnetstate/state_intent.py
+        trigger:
+          kind: ProtonNetState
         type: state
