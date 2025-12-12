@@ -1,0 +1,182 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: kafka-strimzi
+spec:
+  group: kafka.strimzi.io
+  version: v1beta2
+  title: Kafka Strimzi
+  description: This application deploys the strimzi kafka operators.
+  image: ghcr.io/eda-labs/kafka-strimzi:v1.0.0
+  author: Nokia
+  gitPathPrefix: /
+  supportedCoreVersions:
+    - "v4.0"
+  appInfo:
+    readme: README.md
+    categories:
+      - "integrations"
+    ociSpecVersion: v1.0.0
+  components:
+    - crd:
+        path: cluster-operator/040-Crd-kafka.yaml
+        schema: cluster-operator/docs/eda_oas_kafka.strimzi.io_kafkas.json
+        namespaced: false
+        api:
+          expose: readWrite
+        ui:
+          category: Kafka
+          name: Cluster
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
+        names:
+          plural: kafkas
+          singular: kafka
+          kind: Kafka
+          listKind: KafkaList
+    - crd:
+        path: cluster-operator/041-Crd-kafkaconnect.yaml
+        schema: cluster-operator/docs/eda_oas_kafka.strimzi.io_kafkaconnects.json
+        namespaced: false
+        api:
+          expose: readWrite
+        ui:
+          category: Kafka
+          name: Connect
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
+        names:
+          plural: kafkaconnects
+          singular: kafkaconnect
+          kind: KafkaConnect
+          listKind: KafkaConnectList
+    - crd:
+        path: cluster-operator/043-Crd-kafkatopic.yaml
+        schema: cluster-operator/docs/eda_oas_kafka.strimzi.io_kafkatopics.json
+        namespaced: false
+        api:
+          expose: readWrite
+        ui:
+          category: Kafka
+          name: Topic
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
+        names:
+          plural: kafkatopics
+          singular: kafkatopic
+          kind: KafkaTopic
+          listKind: KafkaTopicList
+    - crd:
+        path: cluster-operator/044-Crd-kafkauser.yaml
+        schema: cluster-operator/docs/eda_oas_kafka.strimzi.io_kafkausers.json
+        namespaced: false
+        api:
+          expose: readWrite
+        ui:
+          category: Kafka
+          name: User
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
+        names:
+          plural: kafkausers
+          singular: kafkauser
+          kind: KafkaUser
+          listKind: KafkaUserList
+    - crd:
+        path: cluster-operator/045-Crd-kafkanodepool.yaml
+        schema: cluster-operator/docs/eda_oas_kafka.strimzi.io_kafkanodepools.json
+        namespaced: false
+        api:
+          expose: readWrite
+        ui:
+          category: Kafka
+          name: NodePool
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
+        names:
+          singular: kafkanodepool
+          kind: KafkaNodePool
+          listKind: KafkaNodePoolList
+          plural: kafkanodepools
+    - crd:
+        path: cluster-operator/046-Crd-kafkabridge.yaml
+        schema: cluster-operator/docs/eda_oas_kafka.strimzi.io_kafkabridges.json
+        namespaced: false
+        api:
+          expose: readWrite
+        ui:
+          category: Kafka
+          name: Bridge
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
+        names:
+          singular: kafkabridge
+          kind: KafkaBridge
+          listKind: KafkaBridgeList
+          plural: kafkabridges
+    - crd:
+        path: cluster-operator/047-Crd-kafkaconnector.yaml
+        schema: cluster-operator/docs/eda_oas_kafka.strimzi.io_kafkaconnectors.json
+        namespaced: false
+        api:
+          expose: readWrite
+        ui:
+          category: Kafka
+          name: Connector
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
+        names:
+          kind: KafkaConnector
+          listKind: KafkaConnectorList
+          plural: kafkaconnectors
+          singular: kafkaconnector
+    - crd:
+        path: cluster-operator/048-Crd-kafkamirrormaker2.yaml
+        schema: cluster-operator/docs/eda_oas_kafka.strimzi.io_kafkamirrormaker2s.json
+        namespaced: false
+        api:
+          expose: readWrite
+        ui:
+          category: Kafka
+          name: MirrorMaker2
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
+        names:
+          listKind: KafkaMirrorMaker2List
+          plural: kafkamirrormaker2s
+          singular: kafkamirrormaker2
+          kind: KafkaMirrorMaker2
+    - crd:
+        path: cluster-operator/049-Crd-kafkarebalance.yaml
+        schema: cluster-operator/docs/eda_oas_kafka.strimzi.io_kafkarebalances.json
+        namespaced: false
+        api:
+          expose: readWrite
+        ui:
+          category: Kafka
+          name: Rebalance
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
+        names:
+          plural: kafkarebalances
+          singular: kafkarebalance
+          kind: KafkaRebalance
+          listKind: KafkaRebalanceList
+    - cr:
+        path: cluster-operator/manifests/app_deployment.yaml
+  dependencies:
+    - container:
+        name: strimzi-cluster-operator
+        image: ghcr.io/eda-labs/kafka-strimzi-operator:v1.0.0
+  requirements:
+    - appId: core.strimzi.io
+      version: v1.0.0
