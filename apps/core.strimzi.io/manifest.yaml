@@ -1,0 +1,37 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: strimzi-core
+spec:
+  group: core.strimzi.io
+  version: v1beta2
+  title: Strimzi PodSet Core
+  description: This application installs the strimzi podset core CustomResource..
+  image: ghcr.io/eda-labs/kafka-strimzi-core:v1.0.0
+  author: Nokia
+  gitPathPrefix: /
+  supportedCoreVersions:
+    - "v4.0"
+  appInfo:
+    readme: README.md
+    categories:
+      - "integrations"
+    ociSpecVersion: v1.0.0
+  components:
+    - crd:
+        path: cluster-operator/042-Crd-strimzipodset.yaml
+        schema: cluster-operator/docs/eda_oas_core.strimzi.io_strimzipodsets.json
+        namespaced: true
+        api:
+          expose: readWrite
+        ui:
+          category: Kafka
+          name: PodSet
+        kubernetes:
+          exportPolicy: all
+          importPolicy: all
+        names:
+          singular: strimzipodset
+          kind: StrimziPodSet
+          listKind: StrimziPodSetList
+          plural: strimzipodsets
