@@ -24,8 +24,7 @@ spec:
   group: proton.eda.local
   image: ghcr.io/eda-labs/proton:v0.2.0
   supportedCoreVersions:
-    - v3.0.0-0
-    - v4.*
+    - v4.0.0-0
   title: Proton
   version: v1alpha1
   requirements:
@@ -66,10 +65,10 @@ spec:
         path: proton/crds/proton.eda.local_protonuplinkstates.yaml
         schema: proton/openapiv3/eda_oas_proton.eda.local_protonuplinkstates.json
         names:
-          listKind: ProtonUplinkStateList
-          plural: protonuplinkstates
           singular: protonuplinkstate
           kind: ProtonUplinkState
+          listKind: ProtonUplinkStateList
+          plural: protonuplinkstates
     - script:
         path: proton/intents/protonuplinkstate/state_intent.py
         trigger:
@@ -99,10 +98,10 @@ spec:
         path: proton/crds/proton.eda.local_protonnetstates.yaml
         schema: proton/openapiv3/eda_oas_proton.eda.local_protonnetstates.json
         names:
-          plural: protonnetstates
           singular: protonnetstate
           kind: ProtonNetState
           listKind: ProtonNetStateList
+          plural: protonnetstates
     - script:
         path: proton/intents/protonnetstate/state_intent.py
         trigger:
