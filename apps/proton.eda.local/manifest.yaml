@@ -22,24 +22,25 @@ spec:
         path: proton/api/v1alpha1/pysrc
   description: Custom networking app for Proton
   group: proton.eda.local
-  image: ghcr.io/eda-labs/proton:v0.0.2
+  image: ghcr.io/eda-labs/proton:v0.2.0
   supportedCoreVersions:
     - v3.0.0-0
+    - v4.*
   title: Proton
   version: v1alpha1
   requirements:
     - appName: services
       vendor: nokia
-      version: v4.*
+      version: v5.*
     - appName: fabrics
       vendor: nokia
-      version: v4.*
+      version: v5.*
     - appName: interfaces
       vendor: nokia
-      version: v4.*
+      version: v5.*
     - appName: protocols
       vendor: nokia
-      version: v4.*
+      version: v5.*
   components:
     - crd:
         api:
@@ -65,12 +66,45 @@ spec:
         path: proton/crds/proton.eda.local_protonuplinkstates.yaml
         schema: proton/openapiv3/eda_oas_proton.eda.local_protonuplinkstates.json
         names:
-          kind: ProtonUplinkState
           listKind: ProtonUplinkStateList
           plural: protonuplinkstates
           singular: protonuplinkstate
+          kind: ProtonUplinkState
     - script:
         path: proton/intents/protonuplinkstate/state_intent.py
         trigger:
           kind: ProtonUplinkState
+        type: state
+    - crd:
+        api:
+          expose: readWrite
+        path: proton/crds/proton.eda.local_protonnets.yaml
+        schema: proton/openapiv3/eda_oas_proton.eda.local_protonnets.json
+        ui:
+          category: Proton
+          name: Proton Nets
+        names:
+          plural: protonnets
+          singular: protonnet
+          kind: ProtonNet
+          listKind: ProtonNetList
+    - script:
+        path: proton/intents/protonnet/config_intent.py
+        trigger:
+          kind: ProtonNet
+        type: config
+    - crd:
+        api:
+          expose: none
+        path: proton/crds/proton.eda.local_protonnetstates.yaml
+        schema: proton/openapiv3/eda_oas_proton.eda.local_protonnetstates.json
+        names:
+          plural: protonnetstates
+          singular: protonnetstate
+          kind: ProtonNetState
+          listKind: ProtonNetStateList
+    - script:
+        path: proton/intents/protonnetstate/state_intent.py
+        trigger:
+          kind: ProtonNetState
         type: state
