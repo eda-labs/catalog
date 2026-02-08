@@ -1,0 +1,26 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: demo-as-an-app
+spec:
+  appInfo:
+    categories:
+      - uncategorised
+    documentation: demo_as_an_app/docs
+    ociSpecVersion: v1.0.0
+  author: eda-labs
+  components:
+    - cr:
+        path: demo_as_an_app/resources/ns.yaml
+  dependencies:
+    - file:
+        path: utils
+    - file:
+        path: common
+  description: Sample description
+  group: demo-as-an-app.eda.labs
+  image: ghcr.io/eda-labs/demo-as-an-app:v0.0.0
+  supportedCoreVersions:
+    - v4.0.0-0
+  title: Demo As An App
+  version: v1alpha1
