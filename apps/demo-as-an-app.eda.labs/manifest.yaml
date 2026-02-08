@@ -12,6 +12,8 @@ spec:
   components:
     - cr:
         path: demo_as_an_app/resources/ns.yaml
+    - cr:
+        path: demo_as_an_app/resources/topo.yaml
   dependencies:
     - file:
         path: utils
