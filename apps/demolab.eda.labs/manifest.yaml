@@ -18,6 +18,10 @@ spec:
         path: demolab/api/v1alpha1/pysrc
     - file:
         path: demolab/intents
+    - file:
+        path: demolab/deps
+    - file:
+        path: demolab/resources
   description: Sample description
   group: demolab.eda.labs
   image: ghcr.io/eda-labs/demo-as-an-app:v0.0.0
@@ -25,6 +29,9 @@ spec:
     - v4.0.0-0
   title: Demolab
   version: v1alpha1
+  requirements:
+    - appId: topologies.eda.nokia.com
+      version: v5.0.*
   components:
     - crd:
         api:
@@ -35,10 +42,10 @@ spec:
           category: Demolab
           name: demoes
         names:
-          listKind: DemoList
-          plural: demoes
           singular: demo
           kind: Demo
+          listKind: DemoList
+          plural: demoes
     - script:
         path: demolab/intents/demo/config_intent.py
         trigger:
