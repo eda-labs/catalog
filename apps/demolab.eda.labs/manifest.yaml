@@ -1,0 +1,46 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: demolab
+spec:
+  appInfo:
+    categories:
+      - uncategorised
+    documentation: demolab/docs
+    ociSpecVersion: v1.0.0
+  author: eda-labs
+  dependencies:
+    - file:
+        path: utils
+    - file:
+        path: common
+    - file:
+        path: demolab/api/v1alpha1/pysrc
+    - file:
+        path: demolab/intents
+  description: Sample description
+  group: demolab.eda.labs
+  image: ghcr.io/eda-labs/demo-as-an-app:v0.0.0
+  supportedCoreVersions:
+    - v4.0.0-0
+  title: Demolab
+  version: v1alpha1
+  components:
+    - crd:
+        api:
+          expose: readWrite
+        path: demolab/crds/demolab.eda.labs_demoes.yaml
+        schema: demolab/openapiv3/eda_oas_demolab.eda.labs_demoes.json
+        ui:
+          category: Demolab
+          name: demoes
+        names:
+          singular: demo
+          kind: Demo
+          listKind: DemoList
+          plural: demoes
+    - script:
+        path: demolab/intents/demo/config_intent.py
+        trigger:
+          kind: Demo
+        type: config
