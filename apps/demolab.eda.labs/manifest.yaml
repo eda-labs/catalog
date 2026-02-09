@@ -42,10 +42,10 @@ spec:
           category: Demolab
           name: demoes
         names:
+          plural: demoes
           singular: demo
           kind: Demo
           listKind: DemoList
-          plural: demoes
     - script:
         path: demolab/intents/demo/config_intent.py
         trigger:
