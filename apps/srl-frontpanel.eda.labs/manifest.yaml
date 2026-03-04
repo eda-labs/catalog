@@ -1,0 +1,44 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: srl-frontpanel
+spec:
+  appInfo:
+    categories:
+      - uncategorised
+    documentation: srl_frontpanel/docs
+    ociSpecVersion: v1.0.0
+  author: eda-labs
+  dependencies:
+    - file:
+        path: utils
+    - file:
+        path: common
+    - file:
+        path: srl_frontpanel/api/v1alpha1/pysrc
+    - container:
+        image: ghcr.io/eda-labs/srl_frontpanel/workflows/installsrlfrontpanel:latest
+        name: installsrlfrontpanel
+  description: Sample description
+  group: srl-frontpanel.eda.labs
+  image: ghcr.io/eda-labs/srl-frontpanel:v0.0.0
+  supportedCoreVersions:
+    - v4.0.0-0
+  title: Srl Frontpanel
+  version: v1alpha1
+  components:
+    - crd:
+        api:
+          expose: readWrite
+        path: srl_frontpanel/crds/srl-frontpanel.eda.labs_installsrlfrontpanels.yaml
+        schema: srl_frontpanel/openapiv3/eda_oas_srl-frontpanel.eda.labs_installsrlfrontpanels.json
+        ui:
+          name: Install SR Linux Frontpanel Plugin
+        workflow: true
+        names:
+          plural: installsrlfrontpanels
+          singular: installsrlfrontpanel
+          kind: InstallSrlFrontpanel
+          listKind: InstallSrlFrontpanelList
+    - cr:
+        path: srl_frontpanel/workflows/installsrlfrontpanel/flowdefinition.yaml
