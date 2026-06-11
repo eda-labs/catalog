@@ -1,0 +1,70 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: simple-fabrics
+spec:
+  appInfo:
+    categories:
+      - fabrics
+      - networking
+    documentation: simple_fabrics/docs
+    ociSpecVersion: v1.0.0
+  author: eda-labs
+  dependencies:
+    - file:
+        path: utils
+    - file:
+        path: common
+    - file:
+        path: simple_fabrics/api/v1alpha1/pysrc
+    - file:
+        path: simple_fabrics/intents
+    - file:
+        path: simple_fabrics/deps
+    - file:
+        path: simple_fabrics/api
+  description: Sample description
+  group: simple-fabrics.eda.local
+  image: ghcr.io/eda-labs/simple-fabrics:v0.1.0
+  supportedCoreVersions:
+    - v4.0.0-0
+    - v5.0.0-0
+    - v6.0.0-0
+    - v7.0.0-0
+  title: Simple Fabrics
+  version: v1alpha1
+  components:
+    - crd:
+        api:
+          expose: readWrite
+        path: simple_fabrics/crds/simple-fabrics.eda.local_simplefabrics.yaml
+        schema: simple_fabrics/openapiv3/eda_oas_simple-fabrics.eda.local_simplefabrics.json
+        ui:
+          category: Fabrics
+          name: Simple Fabrics
+        names:
+          plural: simplefabrics
+          singular: simplefabric
+          kind: SimpleFabric
+          listKind: SimpleFabricList
+    - script:
+        path: simple_fabrics/intents/simplefabric/config_intent.py
+        trigger:
+          kind: SimpleFabric
+        type: config
+    - crd:
+        path: simple_fabrics/crds/simple-fabrics.eda.local_simplefabricstates.yaml
+        schema: simple_fabrics/openapiv3/eda_oas_simple-fabrics.eda.local_simplefabricstates.json
+        names:
+          plural: simplefabricstates
+          singular: simplefabricstate
+          kind: SimpleFabricState
+          listKind: SimpleFabricStateList
+    - script:
+        path: simple_fabrics/intents/simplefabricstate/state_intent.py
+        trigger:
+          kind: SimpleFabricState
+        type: state
+  requirements:
+    - appId: fabrics.eda.nokia.com
+      version: v5.0.*

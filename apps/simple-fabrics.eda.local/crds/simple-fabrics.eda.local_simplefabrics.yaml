@@ -1,0 +1,75 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.19.0
+  name: simplefabrics.simple-fabrics.eda.local
+spec:
+  group: simple-fabrics.eda.local
+  names:
+    kind: SimpleFabric
+    listKind: SimpleFabricList
+    plural: simplefabrics
+    singular: simplefabric
+  scope: Namespaced
+  versions:
+  - name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: SimpleFabric is the Schema for the simplefabrics API
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: |-
+              This app demonstrates how developers
+              can build abstractions using the existing resources.
+              The Simple Fabric application configures the EVPN VXLAN fabric
+              with a simplified set of inputs when compared to the Fabrics app.
+              It assumes the default values for the node selectors, protocol configuration, etc,
+              while exposing a minimal set of parameters to a user.
+            properties:
+              underlayASNPool:
+                default: asn-pool
+                description: |-
+                  The ASN pool used for the underlay network.
+                  The `asn-pool` default value is the default ASN pool
+                  that comes with "Try EDA" installation.
+                type: string
+            required:
+            - underlayASNPool
+            type: object
+          status:
+            description: SimpleFabricStatus defines the observed state of SimpleFabric
+            properties:
+              fabricName:
+                description: The name of the backing Fabric that the Simple Fabric
+                  created.
+                type: string
+              operationalState:
+                description: |-
+                  Operational state of the Simple Fabric uses the operational state
+                  of the backing fabric.
+                type: string
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
