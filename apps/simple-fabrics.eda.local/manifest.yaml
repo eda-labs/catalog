@@ -67,4 +67,4 @@ spec:
         type: state
   requirements:
     - appId: fabrics.eda.nokia.com
-      version: v5.0.*
+      version: v6.*.*
