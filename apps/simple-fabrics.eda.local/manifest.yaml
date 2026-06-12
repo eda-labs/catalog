@@ -56,10 +56,10 @@ spec:
         path: simple_fabrics/crds/simple-fabrics.eda.local_simplefabricstates.yaml
         schema: simple_fabrics/openapiv3/eda_oas_simple-fabrics.eda.local_simplefabricstates.json
         names:
+          listKind: SimpleFabricStateList
           plural: simplefabricstates
           singular: simplefabricstate
           kind: SimpleFabricState
-          listKind: SimpleFabricStateList
     - script:
         path: simple_fabrics/intents/simplefabricstate/state_intent.py
         trigger:
