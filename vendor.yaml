@@ -1,0 +1,12 @@
+apiVersion: appstore.eda.nokia.com/v1
+kind: Vendor
+metadata:
+  name: eda-labs
+spec:
+  # Supported icon formats: .png, .svg
+  icons:
+    light: icons/light.svg
+    dark: icons/dark.svg
+  description: "EDA Labs is an incubator for new Nokia EDA apps and tools. Not an official Nokia product, comes with no warranty or support."
+  title: EDA Labs # Vendor name to display in UI
+  homepage: "https://docs.eda.dev"
