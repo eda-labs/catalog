@@ -20,7 +20,7 @@ spec:
         name: cable-map
   description: Cable-map topology and front-panel view for EDA fabrics.
   group: cable-map.eda.labs
-  image: ghcr.io/eda-labs/cable-map:v0.2.1
+  image: ghcr.io/eda-labs/cable-map:v0.2.2
   supportedCoreVersions:
     - v5.0.0-0
   title: Cable Map
