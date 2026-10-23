@@ -8,12 +8,13 @@ spec:
       - integrations
     documentation: demo_storage/docs
     ociSpecVersion: v1.0.0
+    appImageDigest: sha256:170d1fd52dcf7866646f67942029349064e6417c2ebf7d06a7835a88206c0310
   author: eda-labs
   description: Lab/PoC HTTP file server.
   group: demo-storage.eda.labs
-  image: ghcr.io/eda-labs/demo-storage:v0.1.0
+  image: ghcr.io/eda-labs/demo-storage:v0.2.0
   supportedCoreVersions:
-    - v5.0
+    - v6.0
   title: Demo Storage
   version: v1alpha1
   components:
